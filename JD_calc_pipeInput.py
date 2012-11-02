@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # This is a simple JD date calculator 
 # The input is two columns of YearMonthDate and TimeinSeconds OR Time in HR:MIN:SEC 
-# Example: cat 2columnTextfile | ./JD_calc_v2.py 
+# Example: cat 2columnTextfile | ./JD_calc_pipeInput.py 
 # Where the 2columnTextfile is in format 20120831 5436  <OR> 20120831 16:25:34
 #...................................................indiajoe@gmail.com
 import datetime
