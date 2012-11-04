@@ -66,9 +66,14 @@ print "RA at Midnight will be ", RA_at_Mid
 #print "Press Cntrl-C to exit after done with all sources"
 while 1 :
     try:
-        h,m,s =map(float, raw_input('RA  (Eg: hr min sec) : ').split(' '))
+        rainput=raw_input('RA  (Eg: hr min sec) : ')
         decinput=raw_input('Dec (Eg: Deg min sec) : ')
-        d,dm,ds =map(float, decinput.split(' '))
+        RAdelimiter=' '
+        DECdelimiter=' '
+        if rainput.find(':') > 0 : RAdelimiter=':'
+        if decinput.find(':') > 0 : DECdelimiter=':'
+        h,m,s =map(float, rainput.split(RAdelimiter))
+        d,dm,ds =map(float, decinput.split(DECdelimiter))
     except (KeyboardInterrupt, EOFError):
         print("Exiting.. \n ")
         exit(0)
