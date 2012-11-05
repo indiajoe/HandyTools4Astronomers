@@ -93,7 +93,14 @@ while 1 :
         Transit_hr=24+Hours
 #    print "Transit of the star will occur at ",int(Transit_hr),":",int(Transit_min) ,"hours"
     # Rise and Set time calculation
-    H_rad= acos(sin(Elevation_Limit)/(cos(radians(Latitude))*cos(radians(DEC))) - tan(radians(Latitude))*tan(radians(DEC)))
+    try: 
+        H_rad= acos(sin(Elevation_Limit)/(cos(radians(Latitude))*cos(radians(DEC))) - tan(radians(Latitude))*tan(radians(DEC)))
+    except (ValueError):
+        print("---------------------------------------------")
+        print("MathError: WARNING: The object probably NEVER rises nor sets")
+        print("Object's Transit time = "+str(int(Transit_hr))+":"+str(int(Transit_min)))
+        print("---------------------------------------------")
+        continue
     H=H_rad*24.0/(2*3.14)  #in hours
     Rise_Hours= floor(RA_diff-H)
     Rise_Minut=(RA_diff-H-Rise_Hours)*60
