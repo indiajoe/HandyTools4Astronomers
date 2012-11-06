@@ -9,6 +9,7 @@ from math import *
 import time
 import datetime
 import sys
+import readline # for interative editing of input line
 
 def is_Number(numb) :
     try:
