@@ -67,8 +67,8 @@ print "RA at Midnight will be ", RA_at_Mid
 #print "Press Cntrl-C to exit after done with all sources"
 while 1 :
     try:
-        rainput=raw_input('RA  (Eg: hr min sec) : ')
-        decinput=raw_input('Dec (Eg: Deg min sec) : ')
+        rainput=raw_input('RA  (Eg: hr min sec) : ').strip(' ')  #strips away leading and trailing whitespaces.
+        decinput=raw_input('Dec (Eg: Deg min sec) : ').strip(' ')
         RAdelimiter=' '
         DECdelimiter=' '
         if rainput.find(':') > 0 : RAdelimiter=':'
@@ -80,7 +80,7 @@ while 1 :
         exit(0)
     
     RA=h + m/60.00 + s/3600.00
-    if  (decinput.split(' ')[0][0] == "-") :  #Negative declination
+    if  (decinput.split(DECdelimiter)[0][0] == "-") :  #Negative declination
         dm=-dm
         ds=-ds
     DEC=d + dm/60.00 + ds/3600.00
