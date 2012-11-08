@@ -69,15 +69,20 @@ while 1 :
     try:
         rainput=raw_input('RA  (Eg: hr min sec) : ').strip(' ')  #strips away leading and trailing whitespaces.
         decinput=raw_input('Dec (Eg: Deg min sec) : ').strip(' ')
-        RAdelimiter=' '
-        DECdelimiter=' '
-        if rainput.find(':') > 0 : RAdelimiter=':'
-        if decinput.find(':') > 0 : DECdelimiter=':'
+    except (KeyboardInterrupt, EOFError):
+        print("\n Exiting.. \n ")
+        exit(0)
+
+    RAdelimiter=' '
+    DECdelimiter=' '
+    if rainput.find(':') > 0 : RAdelimiter=':'
+    if decinput.find(':') > 0 : DECdelimiter=':'
+    try:
         h,m,s =map(float, rainput.split(RAdelimiter))
         d,dm,ds =map(float, decinput.split(DECdelimiter))
-    except (KeyboardInterrupt, EOFError):
-        print("Exiting.. \n ")
-        exit(0)
+    except (ValueError):
+        print("Error: Wrong input given. \n---------------------------------------------")
+        continue
     
     RA=h + m/60.00 + s/3600.00
     if  (decinput.split(DECdelimiter)[0][0] == "-") :  #Negative declination
