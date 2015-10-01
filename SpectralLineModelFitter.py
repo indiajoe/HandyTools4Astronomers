@@ -17,6 +17,17 @@ plt.rcParams['keymap.fullscreen']=[u'ctrl+f']  # To remove full screen togle on 
 FWindowToFit = 25  # In wavelgth, Forward size of window to fit the line model
 BWindowToFit = 35  # In wavelgth, Forward size of window to fit the line model
 
+if len(sys.argv) < 4 :
+    print("--------------------------------------------------------")
+    print(" Usage  : "+sys.argv[0]+" SpectrumFileList.txt OutputTableFile.txt LineList.txt")
+    print(" where ")
+    print(" SpectrumFileList.txt : A text file containing list of input spectrum to fit lines")
+    print(" OutputTableFile.txt : Name of output table into which fitted results will be written.")
+    print(" LineList.txt : A text file contianing list of lines to fit.")
+    print("                First column: wavelength, second column: labels, and third optional colums: flags")
+    print("----------------------------------------------------------------")
+    sys.exit(1)
+
 SpectrumFileList = sys.argv[1]
 OutputTableFile = sys.argv[2]
 LinesToFitFile = sys.argv[3]
