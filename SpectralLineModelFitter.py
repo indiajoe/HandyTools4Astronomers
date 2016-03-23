@@ -192,7 +192,7 @@ def FitInteractiveGaussian(Spec,Line):
 
     FittedModel,BkgEstimate,Bkg = ModelBkgBkgList[0],ModelBkgBkgList[1],ModelBkgBkgList[2]
     
-    Area = FittedModel.amplitude.value * abs(FittedModel.stddev.value) *np.sqrt(np.pi)
+    Area = FittedModel.amplitude.value * abs(FittedModel.stddev.value) *np.sqrt(2*np.pi)
     Eqw = Area/Bkg(FittedModel.mean.value+Line)
     LineBkgSub = Spec[Bkgleft[1]:Bkgright[0],1] - Bkg(Spec[Bkgleft[1]:Bkgright[0],0])
     DeltaX = np.abs(np.mean(Spec[Bkgleft[1]:Bkgright[0]-1,0] - Spec[Bkgleft[1]+1:Bkgright[0],0]))
@@ -215,7 +215,7 @@ def FitSingleGaussianLine(Spec,Line):
     LineModel = models.Gaussian1D(amplitude=Amp, mean=0, stddev=4) + models.Linear1D(slope=0,intercept=BackG)
 
     FittedModel = FitModel(Spec[Start:End,0]-Line, Spec[Start:End,1],LineModel)  # Centering the x on zero for fitting
-    Area = FittedModel.amplitude_0.value * abs(FittedModel.stddev_0.value) *np.sqrt(np.pi)
+    Area = FittedModel.amplitude_0.value * abs(FittedModel.stddev_0.value) *np.sqrt(2*np.pi)
     Eqw = Area/FittedModel[1](FittedModel.mean_0.value)
     print('Flux = {0} ; EQW ={1}'.format(Area/FLUXSCALE,Eqw))
     fig = plt.figure()
@@ -287,9 +287,9 @@ def FitPCygniLine(Spec,Line,interactive=False):
 
     FittedModel = FitModel(Spec[Start:End,0]-Line, Spec[Start:End,1],LineModel)  # Centering the x on zero for fitting
 
-    Area0 = FittedModel.amplitude_0.value * abs(FittedModel.stddev_0.value) *np.sqrt(np.pi)
+    Area0 = FittedModel.amplitude_0.value * abs(FittedModel.stddev_0.value) *np.sqrt(2*np.pi)
     Eqw0 = Area0/FittedModel[2](0.0)
-    Area1 = FittedModel.amplitude_1.value * abs(FittedModel.stddev_1.value) *np.sqrt(np.pi)
+    Area1 = FittedModel.amplitude_1.value * abs(FittedModel.stddev_1.value) *np.sqrt(2*np.pi)
     Eqw1 = Area1/FittedModel[2](0.0)
 
     print('Flux_0 = {0} ; EQW_0 ={1}'.format(Area0/FLUXSCALE,Eqw0))
@@ -387,9 +387,9 @@ for SpectrumFile in SpectrumList:
         print('*'*6+'{0}'.format(line)+'*'*6)
         FittedLine, Quality = FitPCygniLine(Spectrum,line,interactive=True)
         if Quality in ['0','1','2']:
-            AreaEmi = FittedLine.amplitude_0.value * abs(FittedLine.stddev_0.value) *np.sqrt(np.pi)
+            AreaEmi = FittedLine.amplitude_0.value * abs(FittedLine.stddev_0.value) *np.sqrt(2*np.pi)
             EqwEmi = AreaEmi/FittedLine[2](FittedLine.mean_0.value)
-            AreaAbs = FittedLine.amplitude_1.value * abs(FittedLine.stddev_1.value) *np.sqrt(np.pi)
+            AreaAbs = FittedLine.amplitude_1.value * abs(FittedLine.stddev_1.value) *np.sqrt(2*np.pi)
             EqwAbs = AreaAbs/FittedLine[2](FittedLine.mean_1.value)
             PeakPosEmi = FittedLine.mean_0.value + line
             PeakPosAbs = FittedLine.mean_1.value + line
@@ -440,7 +440,7 @@ for SpectrumFile in SpectrumList:
         print('*'*6+'{0}'.format(line)+'*'*6)
         FittedLine, Quality = FitSingleGaussianLine(Spectrum,line)
         if Quality in ['0','1','2']:
-            Area = FittedLine.amplitude_0.value * abs(FittedLine.stddev_0.value) *np.sqrt(np.pi)
+            Area = FittedLine.amplitude_0.value * abs(FittedLine.stddev_0.value) *np.sqrt(2*np.pi)
             Eqw = Area/FittedLine[1](FittedLine.mean_0.value)
             PeakPos = FittedLine.mean_0.value + line
         else:
